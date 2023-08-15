@@ -1,10 +1,12 @@
-package main
-
-import "fmt"
+package singlylinkedlist
 
 type node struct {
 	data string
 	next *node
+}
+
+func newNode(data string, next *node) *node {
+	return &node{data: data, next: next}
 }
 
 type linkedList struct {
@@ -19,14 +21,18 @@ func (l *linkedList) prepend(n node) {
 	l.length++
 }
 
-func (l *linkedList) printList() {
+func (l linkedList) getListData() []string {
 	toPrint := l.head
+
+	data := make([]string, 0, l.length)
+
 	for l.length != 0 {
-		fmt.Printf("%#v -> ", toPrint.data)
+		data = append(data, toPrint.data)
 		toPrint = toPrint.next
 		l.length--
 	}
-	println()
+
+	return data
 }
 
 func (l *linkedList) delete(data string) {
